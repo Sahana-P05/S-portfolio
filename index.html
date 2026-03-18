@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sahana P | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        .animate-delay-1 { animation-delay: 0.2s; }
+        .animate-delay-2 { animation-delay: 0.4s; }
+        
+        .menu-overlay {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+        }
+        .menu-hidden {
+            transform: translateX(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+        .menu-visible {
+            transform: translateX(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body class="bg-[#FAF9F6] text-[#2C2C2C] font-sans selection:bg-[#E5E5DF] selection:text-[#5D5343]">
+
+    <!-- Navigation Menu Button -->
+    <div class="fixed top-8 left-8 z-50">
+        <button 
+            id="menu-toggle"
+            class="p-4 bg-white/80 backdrop-blur-sm border border-[#E5E5DF] rounded-full shadow-sm hover:border-[#8B7E66] transition-all group"
+        >
+            <i data-lucide="menu" id="menu-icon" class="text-[#8B7E66]"></i>
+        </button>
+    </div>
+
+    <!-- Fullscreen Menu Overlay -->
+    <div id="menu-overlay" class="fixed inset-0 bg-[#F5F5F0]/95 backdrop-blur-md z-40 flex items-center justify-center menu-overlay menu-hidden">
+        <nav class="flex flex-col gap-8 text-center">
+            <button onclick="scrollToSection('about')" class="text-4xl md:text-6xl font-serif italic text-[#5D5343] hover:text-[#8B7E66] transition-colors">About Me</button>
+            <button onclick="scrollToSection('education')" class="text-4xl md:text-6xl font-serif italic text-[#5D5343] hover:text-[#8B7E66] transition-colors">Education</button>
+            <button onclick="scrollToSection('skills')" class="text-4xl md:text-6xl font-serif italic text-[#5D5343] hover:text-[#8B7E66] transition-colors">Skills</button>
+            <button onclick="scrollToSection('certifications')" class="text-4xl md:text-6xl font-serif italic text-[#5D5343] hover:text-[#8B7E66] transition-colors">Certifications</button>
+        </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex flex-col items-center justify-center px-8 md:px-24 pt-12 pb-20 max-w-7xl mx-auto">
+        
+        <!-- Name -->
+        <div class="mb-4 md:mb-6 text-center animate-fade-in">
+            <h1 class="text-4xl sm:text-6xl md:text-8xl font-serif font-bold tracking-widest text-[#5D5343] uppercase">
+                SAHANA P
+            </h1>
+        </div>
+
+        <div class="w-full flex flex-col md:flex-row items-center justify-between gap-12 md:gap-8">
+            
+            <!-- Left Side -->
+            <div class="w-full md:w-1/2 flex flex-col gap-8 animate-fade-in animate-delay-1">
+                <h2 class="text-3xl md:text-5xl font-bold leading-tight tracking-tight text-[#2C2C2C]">
+                    Learning Today, <br />
+                    <span class="text-[#8B7E66] font-serif italic">Building Tomorrow's</span> <br />
+                    Technology.
+                </h2>
+                
+                <div class="flex flex-col gap-4">
+                    <a 
+                        href="resume.pdf" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        class="flex items-center gap-4 text-base md:text-lg hover:text-[#8B7E66] transition-colors w-fit group"
+                    >
+                        <div class="p-3 rounded-full bg-white border border-[#E5E5DF] group-hover:border-[#8B7E66] transition-all">
+                            <i data-lucide="file-text" class="text-[#8B7E66] w-[18px] h-[18px]"></i>
+                        </div>
+                        <span class="font-medium"> view Resume</span>
+                        
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Side -->
+            <div class="w-full md:w-1/2 flex flex-col items-center md:items-end relative animate-fade-in animate-delay-2">
+                <div class="flex gap-4 mb-6">
+                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="p-3 rounded-full bg-white border border-[#E5E5DF] hover:border-[#8B7E66] hover:text-[#8B7E66] transition-all shadow-sm">
+                        <i data-lucide="linkedin" class="w-[18px] h-[18px]"></i>
+                    </a>
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="p-3 rounded-full bg-white border border-[#E5E5DF] hover:border-[#8B7E66] hover:text-[#8B7E66] transition-all shadow-sm">
+                        <i data-lucide="github" class="w-[18px] h-[18px]"></i>
+                    </a>
+                </div>
+
+                <!-- Profile Photo -->
+                <div class="relative w-full max-w-[420px] aspect-[4/5] md:w-[420px] md:h-[32rem] rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white group">
+                    <img 
+                        src="photo.jpeg" 
+                        alt="Sahana P" 
+                        class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                        referrerpolicy="no-referrer"
+                    >
+                    <div class="absolute inset-0 bg-[#8B7E66]/10 mix-blend-overlay"></div>
+                </div>
+                
+                <div class="absolute -bottom-10 -right-10 w-64 h-64 bg-[#E5E5DF] rounded-full -z-10 opacity-30 blur-3xl"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="bg-[#FAF9F6] py-24 md:py-32 px-8">
+        <div class="max-w-4xl mx-auto relative">
+            <div class="flex flex-col md:flex-row md:items-start justify-between gap-8 mb-12">
+                <div class="flex flex-col">
+                    <span class="text-sm font-bold tracking-[0.3em] text-[#8B7E66] uppercase mb-2">01</span>
+                    <h2 class="text-4xl md:text-6xl font-serif italic text-[#5D5343]">About Me</h2>
+                </div>
+                
+                <div class="flex flex-col gap-3 md:items-end">
+                    <a href="mailto:shanaprakash750@gmail.com" class="flex items-center gap-3 text-sm hover:text-[#8B7E66] transition-colors group">
+                        <span class="font-medium text-gray-600 group-hover:text-[#8B7E66]">shanaprakash750@gmail.com</span>
+                        <div class="p-2 rounded-full bg-white border border-[#E5E5DF] group-hover:border-[#8B7E66] transition-all">
+                            <i data-lucide="mail" class="text-[#8B7E66] w-[14px] h-[14px]"></i>
+                        </div>
+                    </a>
+
+                    
+                </div>
+            </div>
+
+            <div class="text-lg md:text-xl leading-relaxed text-gray-600 bg-white rounded-[2rem] p-8 md:p-12 shadow-sm border border-[#E5E5DF]">
+                <p class="mb-6 font-bold text-2xl text-[#5D5343] font-serif italic">Hello!</p>
+                <p class="mb-6">
+                    As a student, I am continuously developing my knowledge in areas such as <strong>programming, web development, and computer applications</strong>. I enjoy working on projects that help me improve my problem-solving abilities and practical technical skills.
+                </p>
+                <p>
+                    I am motivated to grow as an IT professional and contribute to innovative projects in the future. Through my personal portfolio, I aim to showcase my <strong>academic projects, technical skills, and learning journey</strong> in the field of computer science.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="bg-[#F5F5F0] py-24 md:py-32 px-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex flex-col mb-12">
+                <span class="text-sm font-bold tracking-[0.3em] text-[#8B7E66] uppercase mb-2">02</span>
+                <h2 class="text-4xl md:text-6xl font-serif italic text-[#5D5343]">Education</h2>
+            </div>
+            <div class="bg-white rounded-[2rem] p-8 md:p-12 shadow-sm border border-[#E5E5DF] space-y-12">
+                <!-- BCA -->
+                <div class="relative pl-8 border-l border-[#E5E5DF]">
+                    <div class="absolute -left-[5px] top-0 w-2.5 h-2.5 rounded-full bg-[#8B7E66]"></div>
+                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
+                        <h3 class="text-2xl font-bold text-[#2C2C2C]">BCA - Bachelor of Computer Application</h3>
+                        <span class="text-[#8B7E66] font-medium">Currently Pursuing</span>
+                    </div>
+                    <p class="text-[#8B7E66] font-serif italic mb-2">Seshadripuram College, Tumakuru</p>
+                    <div class="inline-block px-4 py-1 bg-[#F5F5F0] rounded-full text-sm font-bold text-[#5D5343]">
+                        CGPA: 8.66
+                    </div>
+                </div>
+
+                <!-- 2nd PUC -->
+                <div class="relative pl-8 border-l border-[#E5E5DF]">
+                    <div class="absolute -left-[5px] top-0 w-2.5 h-2.5 rounded-full bg-[#8B7E66]"></div>
+                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
+                        <h3 class="text-2xl font-bold text-[#2C2C2C]">2nd PUC</h3>
+                        <span class="text-[#8B7E66] font-medium">Completed</span>
+                    </div>
+                    <p class="text-[#8B7E66] font-serif italic mb-2">Bharathi Mahesh PU College</p>
+                    <div class="inline-block px-4 py-1 bg-[#F5F5F0] rounded-full text-sm font-bold text-[#5D5343]">
+                        Percentage: 69.33%
+                    </div>
+                </div>
+
+                <!-- SSLC -->
+                <div class="relative pl-8 border-l border-[#E5E5DF]">
+                    <div class="absolute -left-[5px] top-0 w-2.5 h-2.5 rounded-full bg-[#8B7E66]"></div>
+                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
+                        <h3 class="text-2xl font-bold text-[#2C2C2C]">SSLC</h3>
+                        <span class="text-[#8B7E66] font-medium">Completed</span>
+                    </div>
+                    <p class="text-[#8B7E66] font-serif italic mb-2">St. Joseph's English Medium High School</p>
+                    <div class="inline-block px-4 py-1 bg-[#F5F5F0] rounded-full text-sm font-bold text-[#5D5343]">
+                        Percentage: 81.28%
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="bg-[#FAF9F6] py-24 md:py-32 px-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex flex-col mb-12">
+                <span class="text-sm font-bold tracking-[0.3em] text-[#8B7E66] uppercase mb-2">03</span>
+                <h2 class="text-4xl md:text-6xl font-serif italic text-[#5D5343]">Skills</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-[2rem] p-8 shadow-sm border border-[#E5E5DF]">
+                    <h3 class="text-xl font-bold mb-6 text-[#5D5343] flex items-center gap-2">
+                        <span class="w-8 h-8 rounded-lg bg-[#F5F5F0] flex items-center justify-center text-sm">01</span>
+                        Programming & Databases
+                    </h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 bg-[#F5F5F0] rounded-xl text-base font-medium border border-[#E5E5DF] text-[#5D5343] hover:bg-[#8B7E66] hover:text-white transition-all cursor-default">C</span>
+                        <span class="px-4 py-2 bg-[#F5F5F0] rounded-xl text-base font-medium border border-[#E5E5DF] text-[#5D5343] hover:bg-[#8B7E66] hover:text-white transition-all cursor-default">Python</span>
+                        <span class="px-4 py-2 bg-[#F5F5F0] rounded-xl text-base font-medium border border-[#E5E5DF] text-[#5D5343] hover:bg-[#8B7E66] hover:text-white transition-all cursor-default">Java</span>
+                        <span class="px-4 py-2 bg-[#F5F5F0] rounded-xl text-base font-medium border border-[#E5E5DF] text-[#5D5343] hover:bg-[#8B7E66] hover:text-white transition-all cursor-default">MySQL</span>
+                    </div>
+                </div>
+                <div class="bg-white rounded-[2rem] p-8 shadow-sm border border-[#E5E5DF]">
+                    <h3 class="text-xl font-bold mb-6 text-[#5D5343] flex items-center gap-2">
+                        <span class="w-8 h-8 rounded-lg bg-[#F5F5F0] flex items-center justify-center text-sm">02</span>
+                        Web Development
+                    </h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 bg-[#F5F5F0] rounded-xl text-base font-medium border border-[#E5E5DF] text-[#5D5343] hover:bg-[#8B7E66] hover:text-white transition-all cursor-default">HTML</span>
+                        <span class="px-4 py-2 bg-[#F5F5F0] rounded-xl text-base font-medium border border-[#E5E5DF] text-[#5D5343] hover:bg-[#8B7E66] hover:text-white transition-all cursor-default">CSS</span>
+                        <span class="px-4 py-2 bg-[#F5F5F0] rounded-xl text-base font-medium border border-[#E5E5DF] text-[#5D5343] hover:bg-[#8B7E66] hover:text-white transition-all cursor-default">JavaScript</span>
+                    </div>
+                </div>
+                <div class="bg-white rounded-[2rem] p-8 shadow-sm border border-[#E5E5DF] md:col-span-2">
+                    <h3 class="text-xl font-bold mb-6 text-[#5D5343] flex items-center gap-2">
+                        <span class="w-8 h-8 rounded-lg bg-[#F5F5F0] flex items-center justify-center text-sm">03</span>
+                        Business & Tools
+                    </h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 bg-[#F5F5F0] rounded-xl text-base font-medium border border-[#E5E5DF] text-[#5D5343] hover:bg-[#8B7E66] hover:text-white transition-all cursor-default">Excel</span>
+                        <span class="px-4 py-2 bg-[#F5F5F0] rounded-xl text-base font-medium border border-[#E5E5DF] text-[#5D5343] hover:bg-[#8B7E66] hover:text-white transition-all cursor-default">Tally</span>
+                        <span class="px-4 py-2 bg-[#F5F5F0] rounded-xl text-base font-medium border border-[#E5E5DF] text-[#5D5343] hover:bg-[#8B7E66] hover:text-white transition-all cursor-default">Canva</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="bg-[#F5F5F0] py-24 md:py-32 px-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex flex-col mb-12">
+                <span class="text-sm font-bold tracking-[0.3em] text-[#8B7E66] uppercase mb-2">04</span>
+                <h2 class="text-4xl md:text-6xl font-serif italic text-[#5D5343]">Certifications</h2>
+            </div>
+            <div class="bg-white rounded-[2rem] p-8 md:p-12 shadow-sm border border-[#E5E5DF] space-y-6">
+                
+                <div class="flex items-center justify-between p-6 rounded-2xl hover:bg-[#FAF9F6] transition-colors border border-transparent hover:border-[#E5E5DF] group">
+                    <a href="database&sql.pdf" target="_blank" rel="noopener noreferrer" class="flex-1 cursor-pointer">
+                        <h3 class="font-bold text-lg text-[#2C2C2C] group-hover:text-[#8B7E66] transition-colors">Database and SQL</h3>
+                        <p class="text-sm text-[#8B7E66]">Infosys Springboard</p>
+                    </a>
+                    <div class="flex items-center gap-4">
+                        <a href="database&sql.pdf" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-[#F5F5F0] text-[#8B7E66] hover:bg-[#8B7E66] hover:text-white transition-all opacity-0 group-hover:opacity-100">
+                            <i data-lucide="file-text" class="w-[18px] h-[18px]"></i>
+                        </a>
+                        <i data-lucide="award" class="text-[#E5E5DF] group-hover:text-[#8B7E66] transition-colors w-[24px] h-[24px]"></i>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between p-6 rounded-2xl hover:bg-[#FAF9F6] transition-colors border border-transparent hover:border-[#E5E5DF] group">
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="flex-1 cursor-pointer">
+                        <h3 class="font-bold text-lg text-[#2C2C2C] group-hover:text-[#8B7E66] transition-colors">Tally</h3>
+                        <p class="text-sm text-[#8B7E66]">Dreams Computer Education</p>
+                    </a>
+                    <div class="flex items-center gap-4">
+                        <i data-lucide="award" class="text-[#E5E5DF] group-hover:text-[#8B7E66] transition-colors w-[24px] h-[24px]"></i>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between p-6 rounded-2xl hover:bg-[#FAF9F6] transition-colors border border-transparent hover:border-[#E5E5DF] group">
+                    <a href="DM.pdf" target="_blank" rel="noopener noreferrer" class="flex-1 cursor-pointer">
+                        <h3 class="font-bold text-lg text-[#2C2C2C] group-hover:text-[#8B7E66] transition-colors">Introduction to Digital Marketing</h3>
+                        <p class="text-sm text-[#8B7E66]">Infosys Springboard</p>
+                    </a>
+                    <div class="flex items-center gap-4">
+                        <a href="DM.pdf" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-[#F5F5F0] text-[#8B7E66] hover:bg-[#8B7E66] hover:text-white transition-all opacity-0 group-hover:opacity-100">
+                            <i data-lucide="file-text" class="w-[18px] h-[18px]"></i>
+                        </a>
+                        <i data-lucide="award" class="text-[#E5E5DF] group-hover:text-[#8B7E66] transition-colors w-[24px] h-[24px]"></i>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between p-6 rounded-2xl hover:bg-[#FAF9F6] transition-colors border border-transparent hover:border-[#E5E5DF] group">
+                    <a href="computer Basics.pdf" target="_blank" rel="noopener noreferrer" class="flex-1 cursor-pointer">
+                        <h3 class="font-bold text-lg text-[#2C2C2C] group-hover:text-[#8B7E66] transition-colors">Computer Basics</h3>
+                        <p class="text-sm text-[#8B7E66]">COMPUTECH Computer Education Center</p>
+                    </a>
+                    <div class="flex items-center gap-4">
+                        <a href="computer Basics.pdf" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-[#F5F5F0] text-[#8B7E66] hover:bg-[#8B7E66] hover:text-white transition-all opacity-0 group-hover:opacity-100">
+                            <i data-lucide="file-text" class="w-[18px] h-[18px]"></i>
+                        </a>
+                        <i data-lucide="award" class="text-[#E5E5DF] group-hover:text-[#8B7E66] transition-colors w-[24px] h-[24px]"></i>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between p-6 rounded-2xl hover:bg-[#FAF9F6] transition-colors border border-transparent hover:border-[#E5E5DF] group">
+                    <a href="ibm.jpg" target="_blank" rel="noopener noreferrer" class="flex-1 cursor-pointer">
+                        <h3 class="font-bold text-lg text-[#2C2C2C] group-hover:text-[#8B7E66] transition-colors">Getting Started with Artificial Intelligence</h3>
+                        <p class="text-sm text-[#8B7E66]">IBM SkillsBuild</p>
+                    </a>
+                    <div class="flex items-center gap-4">
+                        <a href="ibm.jpg" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-[#F5F5F0] text-[#8B7E66] hover:bg-[#8B7E66] hover:text-white transition-all opacity-0 group-hover:opacity-100">
+                            <i data-lucide="file-text" class="w-[18px] h-[18px]"></i>
+                        </a>
+                        <i data-lucide="award" class="text-[#E5E5DF] group-hover:text-[#8B7E66] transition-colors w-[24px] h-[24px]"></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#FAF9F6] py-12 text-center border-t border-[#E5E5DF]">
+        <button 
+            onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+            class="p-4 rounded-full bg-white border border-[#E5E5DF] hover:border-[#8B7E66] text-[#8B7E66] transition-all mb-8 shadow-sm"
+        >
+            <i data-lucide="arrow-up" class="w-[24px] h-[24px]"></i>
+        </button>
+        <p class="text-[#8B7E66] font-serif italic text-xl mb-2">SAHANA P</p>
+        <p class="text-gray-400 text-sm tracking-widest uppercase">
+            Learning Today, Building Tomorrow's Technology
+        </p>
+    </footer>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Menu Toggle Logic
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuOverlay = document.getElementById('menu-overlay');
+        const menuIcon = document.getElementById('menu-icon');
+        let isMenuOpen = false;
+
+        menuToggle.addEventListener('click', () => {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                menuOverlay.classList.remove('menu-hidden');
+                menuOverlay.classList.add('menu-visible');
+                menuIcon.setAttribute('data-lucide', 'x');
+            } else {
+                menuOverlay.classList.add('menu-hidden');
+                menuOverlay.classList.remove('menu-visible');
+                menuIcon.setAttribute('data-lucide', 'menu');
+            }
+            lucide.createIcons();
+        });
+
+        // Scroll Logic
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+            // Close menu
+            isMenuOpen = false;
+            menuOverlay.classList.add('menu-hidden');
+            menuOverlay.classList.remove('menu-visible');
+            menuIcon.setAttribute('data-lucide', 'menu');
+            lucide.createIcons();
+        }
+    </script>
+</body>
+</html>
